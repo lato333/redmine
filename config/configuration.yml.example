@@ -81,7 +81,7 @@ default:
   # autologin_cookie_secure: true sets the cookie secure flag (default: false)
   autologin_cookie_name:
   autologin_cookie_path:
-  autologin_cookie_secure:
+  autologin_cookie_secure: true
 
   # Configuration of SCM executable command.
   #

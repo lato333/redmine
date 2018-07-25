@@ -102,11 +102,13 @@ class AccountController < ApplicationController
         user = User.find_by_mail(email)
         # user not found
         unless user
-          flash.now[:error] = l(:notice_account_unknown_email)
+	  flash[:notice] = l(:notice_account_lost_email_sent)
+          redirect_to signin_path
           return
         end
         unless user.active?
-          handle_inactive_user(user, lost_password_path)
+          flash[:notice] = l(:notice_account_lost_email_sent)
+          redirect_to signin_path
           return
         end
         # user cannot change its password
@@ -219,7 +221,7 @@ class AccountController < ApplicationController
         successful_authentication(user)
         update_sudo_timestamp! # activate Sudo Mode
       else
-        handle_inactive_user(user)
+        invalid_credentials
       end
     end
   end
